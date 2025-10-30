@@ -34,6 +34,13 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      // Added ImageKit domain for rootedhands.jpg
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

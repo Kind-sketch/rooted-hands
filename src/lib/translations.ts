@@ -348,7 +348,7 @@ sponsorshipTerminatedToast: 'Sponsorship Terminated',
         title: 'Choose Your Language',
     },
     role_selection_page: {
-        welcome: 'Welcome to Artistry Havens',
+        welcome: 'Welcome to Rooted Hands',
         joinCommunity: 'How would you like to join our community?',
         footer: 'For artisans, the first step will be to register.',
         roles: [

@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { FirebaseClientProvider } from '@/context/firebase-context';
 
 const metadata: Metadata = {
-  title: 'Artistry Havens',
+  title: 'Rooted Hands',
   description: 'A marketplace for artisans, buyers, and sponsors.',
 };
 

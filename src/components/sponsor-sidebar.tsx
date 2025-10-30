@@ -59,7 +59,7 @@ function NavContent({ closeSheet }: { closeSheet?: () => void }) {
             <SheetHeader className="relative flex h-16 shrink-0 items-center border-b px-4">
                 <Link href="/sponsor/dashboard" onClick={() => handleLinkClick('/sponsor/dashboard')} className="flex items-center gap-2 font-semibold">
                     <Logo className="h-8 w-8 text-primary" />
-                    <span className="font-headline text-xl">Artistry Havens</span>
+                    <span className="font-headline text-xl">Rooted Hands</span>
                 </Link>
             </SheetHeader>
             <nav className="flex-1 overflow-y-auto py-4 px-2">

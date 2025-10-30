@@ -1,6 +1,6 @@
 # Firebase Setup Guide
 
-This document outlines the steps to properly configure Firebase for the Artistry Havens application.
+This document outlines the steps to properly configure Firebase for the Rooted Hands application.
 
 ## Prerequisites
 

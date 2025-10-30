@@ -1,4 +1,4 @@
-# **App Name**: Artistry Havens
+# **App Name**: Rooted Hands
 
 ## Core Features:
 

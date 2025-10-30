@@ -1,6 +1,6 @@
 {
-  "name": "Artistry Havens Backend",
-  "description": "Firebase backend configuration for Artistry Havens application",
+  "name": "Rooted Hands Backend",
+  "description": "Firebase backend configuration for Rooted Hands application",
   "services": {
     "firestore": {
       "rules": "firestore.rules",
