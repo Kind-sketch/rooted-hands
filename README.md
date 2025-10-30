@@ -8,56 +8,86 @@ To get started, take a look at src/app/page.tsx.
 
 The application name has been changed from "Artistry Havens" to "Rooted Hands" across the entire codebase.
 
-## Firebase Backend Setup
+## Firebase Setup Requirements
 
-This project includes a complete Firebase backend configuration:
+Before running the application, you need to complete the following Firebase setup tasks:
 
-1. **Authentication**: Phone number authentication for artisans, buyers, and sponsors
-2. **Firestore**: Document database with collections for users, products, orders, and sponsors
-3. **Firebase Storage**: Secure storage with role-based access controls
-4. **Security Rules**: Firestore and Storage security rules defined in `docs/firestore.rules` and `docs/storage.rules`
-5. **Indexes**: Firestore indexes defined in `docs/firestore.indexes.json`
+### 1. Firebase Project Configuration
 
-## Backend Configuration
+1. **Create a Firebase Project**:
+   - Go to the [Firebase Console](https://console.firebase.google.com/)
+   - Click "Create a project" or select an existing project
+   - Follow the setup wizard to create your project
 
-The backend schema is defined in `docs/backend.json` which outlines:
-- Data collections and their fields
-- Authentication providers
-- Security rules
+2. **Enable Firebase Services**:
+   - Enable Authentication with Phone provider
+   - Enable Firestore Database
+   - Enable Firebase Storage
 
-## Remaining Tasks
+3. **Get Firebase Configuration Values**:
+   - In Firebase Console, go to Project Settings > General
+   - Register a web app if you haven't already
+   - Copy the Firebase SDK configuration values
 
-### 1. Firestore Collections Setup
-- [x] Create users collection in Firestore Database
-- [x] Create products collection in Firestore Database
-- [x] Create orders collection in Firestore Database
-- [x] Create sponsors collection in Firestore Database
+4. **Set up Admin SDK**:
+   - In Firebase Console, go to Project Settings > Service Accounts
+   - Generate a new private key (this downloads a JSON file)
+   - Extract the required values from this file
 
-### 2. Firebase Console Configuration
-- [ ] Verify Firestore Database rules are published
-- [ ] Verify Firebase Storage rules are published
-- [x] Confirm Phone Authentication provider is enabled
+### 2. Environment Configuration
 
-### 3. Environment Configuration
-- [x] Verify all Firebase configuration values in .env.local are correct
-- [x] Test authentication flow in the application
+Update your `.env.local` file with the actual Firebase configuration values:
 
-### 4. Application Testing
-- [x] Test user registration flow
-- [x] Test OTP verification
-- [ ] Test data persistence in Firestore
-- [ ] Test image uploads to Firebase Storage
+```env
+# Firebase Configuration (from Firebase Console > Project Settings > General)
+NEXT_PUBLIC_FIREBASE_API_KEY=your_actual_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789012
+NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789012:web:abcdefghijklmnop
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
 
-## Next Steps
+# Firebase Admin SDK (from service account JSON file)
+FIREBASE_PROJECT_ID=your-project-id
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY_HERE\n-----END PRIVATE KEY-----\n"
+FIREBASE_CLIENT_EMAIL=your-project-id@appspot.gserviceaccount.com
 
-To provision the Firebase backend resources:
+# AI Services Configuration
+GEMINI_API_KEY=your_gemini_api_key
+VERTEX_API_KEY=your_vertex_api_key
+GOOGLE_CLOUD_PROJECT_ID=your_google_cloud_project_id
+GOOGLE_CLOUD_REGION=us-central1
+```
 
-1. Install Firebase CLI: `npm install -g firebase-tools`
-2. Login to Firebase: `firebase login`
-3. Initialize Firebase project: `firebase init`
-4. Deploy Firebase resources: `firebase deploy`
+### 3. Firestore Collections Setup
 
-The Firebase configuration files are ready to be used with the Firebase CLI to provision all necessary backend resources.
+Create the following collections in your Firestore Database:
+- `users`
+- `products`
+- `orders`
+- `artisans`
+- `sponsors`
+
+### 4. Firebase Security Rules
+
+Deploy the security rules from the `docs` directory:
+- `docs/firestore.rules` for Firestore Database
+- `docs/storage.rules` for Firebase Storage
+
+## Code Updates Required
+
+### 1. Environment Variables
+
+Ensure all environment variables in `.env.local` are properly configured with actual values from your Firebase project.
+
+### 2. Firebase Configuration
+
+The Firebase configuration is managed in `src/lib/firebase.config.ts` and should work with the environment variables once properly set.
+
+### 3. Firebase Service Implementation
+
+The application uses mock implementations in `src/services/firebase-service.ts` and `src/context/firebase-context.tsx` that need to be replaced with actual Firebase calls.
 
 ## Development
 
@@ -69,53 +99,33 @@ npm run dev
 
 The application will be available at http://localhost:9002
 
-## Firebase Backend Setup
+## Deployment
 
-This project includes a complete Firebase backend configuration:
-
-1. **Authentication**: Phone number authentication for artisans, buyers, and sponsors
-2. **Firestore**: Document database with collections for users, products, orders, and sponsors
-3. **Firebase Storage**: Secure storage with role-based access controls
-4. **Security Rules**: Firestore and Storage security rules defined in `docs/firestore.rules` and `docs/storage.rules`
-5. **Indexes**: Firestore indexes defined in `docs/firestore.indexes.json`
-
-## Backend Configuration
-
-The backend schema is defined in `docs/backend.json` which outlines:
-- Data collections and their fields
-- Authentication providers
-- Security rules
-
-## Remaining Tasks
-
-### 1. Firestore Collections Setup
-- [x] Create users collection in Firestore Database
-- [x] Create products collection in Firestore Database
-- [x] Create orders collection in Firestore Database
-- [x] Create sponsors collection in Firestore Database
-
-### 2. Firebase Console Configuration
-- [ ] Verify Firestore Database rules are published
-- [ ] Verify Firebase Storage rules are published
-- [x] Confirm Phone Authentication provider is enabled
-
-### 3. Environment Configuration
-- [x] Verify all Firebase configuration values in .env.local are correct
-- [x] Test authentication flow in the application
-
-### 4. Application Testing
-- [x] Test user registration flow
-- [x] Test OTP verification
-- [ ] Test data persistence in Firestore
-- [ ] Test image uploads to Firebase Storage
-
-## Next Steps
-
-To provision the Firebase backend resources:
+To deploy the Firebase backend resources:
 
 1. Install Firebase CLI: `npm install -g firebase-tools`
 2. Login to Firebase: `firebase login`
 3. Initialize Firebase project: `firebase init`
 4. Deploy Firebase resources: `firebase deploy`
 
-The Firebase configuration files are ready to be used with the Firebase CLI to provision all necessary backend resources.
+The Firebase configuration files in the `docs` directory are ready to be used with the Firebase CLI to provision all necessary backend resources.
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. **Firebase: Error (auth/invalid-api-key)**:
+   - Verify that `NEXT_PUBLIC_FIREBASE_API_KEY` in `.env.local` is correct
+   - Ensure all Firebase environment variables are properly set
+
+2. **Dependency Issues**:
+   - Run `npm install` to ensure all dependencies are installed
+   - Run `npm install --legacy-peer-deps` if you encounter peer dependency conflicts
+
+3. **Genkit Version Conflicts**:
+   - All Genkit packages should be at the same version (currently 1.22.0)
+   - Check `package.json` for version consistency
+
+4. **Missing Environment Variables**:
+   - Ensure `.env.local` contains all required variables
+   - Restart the development server after updating environment variables
